@@ -1412,7 +1412,7 @@ void mt7603_mac_work(struct work_struct *work)
 		dev->tx_hang_check = 0;
 		dev->rx_dma_check = 0;
 		dev->rx_pse_check = 0;
-		dev->rx_dma_idx = ~0;
+		dev->rx_dma_idx = 0;
 		memset(dev->tx_dma_idx, 0xff, sizeof(dev->tx_dma_idx));
 		reset = true;
 	}
