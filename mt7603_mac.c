@@ -491,7 +491,7 @@ mt7603_mac_fill_rx(struct mt7603_dev *dev, struct sk_buff *skb)
 			break;
 		case MT_PHY_TYPE_HT_GF:
 		case MT_PHY_TYPE_HT:
-			status->flag |= RX_FLAG_HT;
+			status->encoding = RX_ENC_HT;
 			if (i > 15)
 				return -EINVAL;
 			break;
@@ -500,11 +500,11 @@ mt7603_mac_fill_rx(struct mt7603_dev *dev, struct sk_buff *skb)
 		}
 
 		if (rxdg0 & MT_RXV1_HT_SHORT_GI)
-			status->flag |= RX_FLAG_SHORT_GI;
+			status->enc_flags |= RX_ENC_FLAG_SHORT_GI;
 		if (rxdg0 & MT_RXV1_HT_AD_CODE)
 			status->enc_flags |= RX_ENC_FLAG_LDPC;
 
-		status->flag |= RX_FLAG_STBC_MASK *
+		status->enc_flags |= RX_ENC_FLAG_STBC_MASK *
 				    FIELD_GET(MT_RXV1_HT_STBC, rxdg0);
 
 		status->rate_idx = i;
